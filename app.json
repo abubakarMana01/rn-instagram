@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "InstagramClone",
+    "name": "Instagram Clone",
     "slug": "InstagramClone",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A clone of Facebook's Instagram"
   }
 }

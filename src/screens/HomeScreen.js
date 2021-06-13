@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, FlatList, View } from "react-native";
+import { SafeAreaView, FlatList, View, StyleSheet } from "react-native";
 
 import Post from "../components/Post";
 import Stories from "../components/Stories/Stories";
@@ -35,7 +35,7 @@ const posts = [
 
 const HomeScreen = () => {
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={styles.container}>
 			<View>
 				<FlatList
 					keyExtractor={item => item.key.toString()}
@@ -49,3 +49,7 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+	container: { backgroundColor: "#fff" },
+});

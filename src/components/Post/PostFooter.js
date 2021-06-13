@@ -5,31 +5,53 @@ import { FontAwesome, Ionicons } from "@expo/vector-icons";
 const PostFooter = ({ post }) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [likesCount, setLikesCount] = useState(post.likes);
+	const [isBookmarked, setIsBookmarked] = useState(false);
 
 	const handleLike = () => {
 		setIsLiked(!isLiked);
 		setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
 	};
 
+	const handleBookmark = () => {
+		setIsBookmarked(!isBookmarked);
+	};
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.iconsContainer}>
+				<View style={styles.iconsLeft}>
+					<View style={styles.icon}>
+						<TouchableWithoutFeedback onPress={handleLike}>
+							{isLiked ? (
+								<Ionicons name="heart" size={35} color="#e73838" />
+							) : (
+								<Ionicons name="heart-outline" size={35} color="#545454" />
+							)}
+						</TouchableWithoutFeedback>
+					</View>
+					<View style={styles.icon}>
+						<FontAwesome name="comment-o" size={30} color="#545454" />
+					</View>
+					<View style={styles.icon}>
+						<Ionicons
+							name="ios-paper-plane-outline"
+							size={30}
+							color="#545454"
+						/>
+					</View>
+				</View>
+
 				<View style={styles.icon}>
-					<TouchableWithoutFeedback onPress={handleLike}>
-						{isLiked ? (
-							<Ionicons name="heart" size={35} color="#e73838" />
+					<TouchableWithoutFeedback onPress={handleBookmark}>
+						{isBookmarked ? (
+							<Ionicons name="bookmark" size={30} color="#000" />
 						) : (
-							<Ionicons name="heart-outline" size={35} color="#545454" />
+							<Ionicons name="bookmark-outline" size={30} color="#545454" />
 						)}
 					</TouchableWithoutFeedback>
 				</View>
-				<View style={styles.icon}>
-					<FontAwesome name="comment-o" size={30} color="#545454" />
-				</View>
-				<View style={styles.icon}>
-					<Ionicons name="ios-paper-plane-outline" size={30} color="#545454" />
-				</View>
 			</View>
+
 			<Text style={styles.likes}>{likesCount} likes</Text>
 			<Text style={styles.caption}>
 				<Text style={styles.username}>{post.user.username} </Text>
@@ -48,7 +70,11 @@ const styles = StyleSheet.create({
 	},
 	iconsContainer: {
 		flexDirection: "row",
+	},
+	iconsLeft: {
+		flexDirection: "row",
 		alignItems: "flex-start",
+		flex: 1,
 	},
 	icon: {
 		marginRight: 15,

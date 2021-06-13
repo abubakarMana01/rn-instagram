@@ -1,6 +1,6 @@
 import React from "react";
-import AppNavigator from "./src/Navigators/AppNavigator";
+import HomeStackNavigator from "./src/Navigators/HomeStackNavigator";
 
 export default function App() {
-	return <AppNavigator />;
+	return <HomeStackNavigator />;
 }
