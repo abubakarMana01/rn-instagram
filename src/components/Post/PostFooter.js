@@ -23,19 +23,19 @@ const PostFooter = ({ post }) => {
 					<View style={styles.icon}>
 						<TouchableWithoutFeedback onPress={handleLike}>
 							{isLiked ? (
-								<Ionicons name="heart" size={35} color="#e73838" />
+								<Ionicons name="heart" size={30} color="#e73838" />
 							) : (
-								<Ionicons name="heart-outline" size={35} color="#545454" />
+								<Ionicons name="heart-outline" size={30} color="#545454" />
 							)}
 						</TouchableWithoutFeedback>
 					</View>
 					<View style={styles.icon}>
-						<FontAwesome name="comment-o" size={30} color="#545454" />
+						<FontAwesome name="comment-o" size={25} color="#545454" />
 					</View>
 					<View style={styles.icon}>
 						<Ionicons
 							name="ios-paper-plane-outline"
-							size={30}
+							size={25}
 							color="#545454"
 						/>
 					</View>
@@ -44,9 +44,9 @@ const PostFooter = ({ post }) => {
 				<View style={styles.icon}>
 					<TouchableWithoutFeedback onPress={handleBookmark}>
 						{isBookmarked ? (
-							<Ionicons name="bookmark" size={30} color="#000" />
+							<Ionicons name="bookmark" size={25} color="#000" />
 						) : (
-							<Ionicons name="bookmark-outline" size={30} color="#545454" />
+							<Ionicons name="bookmark-outline" size={25} color="#545454" />
 						)}
 					</TouchableWithoutFeedback>
 				</View>

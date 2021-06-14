@@ -22,7 +22,7 @@ const AppNavigator = () => {
 	return (
 		<Tab.Navigator tabBarOptions={{ showLabel: false }}>
 			<Tab.Screen
-				name="Feeds"
+				name="Instagram"
 				component={HomeScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>

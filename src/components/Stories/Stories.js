@@ -18,7 +18,7 @@ const Stories = () => {
 							}
 						/>
 						<Text style={{ textAlign: "center" }} numberOfLines={1}>
-							Me
+							Your story
 						</Text>
 					</>
 				)}
@@ -45,6 +45,7 @@ export default Stories;
 const styles = StyleSheet.create({
 	container: {
 		paddingVertical: 10,
+		paddingLeft: 10,
 		backgroundColor: "#00000003",
 		borderColor: "#00000005",
 		borderTopWidth: 2,

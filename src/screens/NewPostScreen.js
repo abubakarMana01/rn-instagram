@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const MessagesScreen = () => {
+const NewPostScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Text>New Post</Text>
@@ -9,7 +9,7 @@ const MessagesScreen = () => {
 	);
 };
 
-export default MessagesScreen;
+export default NewPostScreen;
 
 const styles = StyleSheet.create({
 	container: {

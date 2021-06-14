@@ -1,7 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const MessagesScreen = () => {
+	const navigation = useNavigation();
+
 	return <View style={styles.container}></View>;
 };
 

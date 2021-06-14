@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const MessagesScreen = () => {
+const AccountScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Text>Account</Text>
@@ -9,7 +9,7 @@ const MessagesScreen = () => {
 	);
 };
 
-export default MessagesScreen;
+export default AccountScreen;
 
 const styles = StyleSheet.create({
 	container: {

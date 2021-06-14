@@ -8,7 +8,7 @@ const PostHeader = ({ post }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.profile}>
-				<ProfilePicture imageUri={post.user.imageUri} width={50} height={50} />
+				<ProfilePicture imageUri={post.user.imageUri} width={40} height={40} />
 				<Text style={styles.username}>{post.user.username}</Text>
 			</View>
 			<MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
 	username: {
 		fontWeight: "700",
 		fontSize: 14,
-		marginLeft: 10,
+		marginLeft: 5,
 	},
 });

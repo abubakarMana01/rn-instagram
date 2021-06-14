@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const MessagesScreen = () => {
+const NotificationsScreen = () => {
 	return (
 		<View style={styles.container}>
 			<Text>Notifications</Text>
@@ -9,7 +9,7 @@ const MessagesScreen = () => {
 	);
 };
 
-export default MessagesScreen;
+export default NotificationsScreen;
 
 const styles = StyleSheet.create({
 	container: {

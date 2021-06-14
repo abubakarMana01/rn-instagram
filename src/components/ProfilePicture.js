@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
+
 const Story = ({
 	imageUri,
 	width = 70,
@@ -29,11 +30,6 @@ const Story = ({
 							style={[styles.storyImage, { borderRadius: width / 2 }]}
 							source={{ uri: imageUri }}
 						/>
-						{showPlus && (
-							<View style={styles.plusIcon}>
-								<MaterialCommunityIcons name="plus" size={15} color="#fff" />
-							</View>
-						)}
 					</View>
 				</LinearGradient>
 			)}
@@ -66,21 +62,22 @@ const styles = StyleSheet.create({
 	container: {
 		justifyContent: "center",
 		alignItems: "center",
-		borderColor: "purple",
-		padding: 3,
+		padding: 1.5,
 	},
 	storyImage: {
 		width: "100%",
 		height: "100%",
-		padding: 2,
+		padding: 3,
 		margin: 0,
 		backgroundColor: "#fff",
 	},
 	plusIcon: {
 		position: "absolute",
 		right: 0,
-		bottom: 5,
+		bottom: 0,
 		backgroundColor: "dodgerblue",
 		borderRadius: 50,
+		borderWidth: 3,
+		borderColor: "#fff",
 	},
 });
