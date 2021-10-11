@@ -2,9 +2,14 @@ import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Colors, Styles } from "../config";
+import { Colors } from "../config";
+import { auth } from "../config/firebase";
 
 const HomeCustomHeader = ({ messagePress }) => {
+	const handleLogout = () => {
+		auth.signOut();
+	};
+
 	return (
 		<View style={styles.container}>
 			<Image
@@ -13,7 +18,7 @@ const HomeCustomHeader = ({ messagePress }) => {
 				source={require("../../assets/images/header-logo.png")}
 			/>
 			<View style={styles.headerIcons}>
-				<TouchableOpacity style={styles.iconContainer}>
+				<TouchableOpacity style={styles.iconContainer} onPress={handleLogout}>
 					<FontAwesome name="plus-square-o" size={26} color={Colors.light} />
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.iconContainer} onPress={messagePress}>

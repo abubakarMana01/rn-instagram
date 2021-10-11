@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import AuthButton from "../../components/Auth/AuthButton";
 import { Colors, Styles } from "../../config";
 import ErrorMessage from "../../components/Auth/ErrorMessage";
+import { auth } from "../../config/firebase";
 
 export default function LoginScreen({ navigation }) {
 	const validationSchema = Yup.object().shape({
@@ -23,8 +24,15 @@ export default function LoginScreen({ navigation }) {
 		password: Yup.string().required().min(6).max(255).label("Password"),
 	});
 
-	const handleSubmit = values => {
-		console.log(values);
+	const handleSubmit = async values => {
+		try {
+			const cred = await auth.signInWithEmailAndPassword(
+				values.email,
+				values.password
+			);
+		} catch (error) {
+			console.log(error.message);
+		}
 	};
 
 	return (
