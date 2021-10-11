@@ -1,12 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
-	Foundation,
 	Feather,
-	AntDesign,
 	Ionicons,
 	FontAwesome,
-	FontAwesome5,
 	MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
@@ -15,25 +12,27 @@ import DiscoveryScreen from "../screens/DiscoveryScreen";
 import AccountScreen from "../screens/AccountScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import HomeScreen from "../screens/HomeScreen";
+import { Colors } from "../config";
 
 const AppNavigator = () => {
 	const Tab = createBottomTabNavigator();
 
 	return (
-		<Tab.Navigator tabBarOptions={{ showLabel: false }}>
+		<Tab.Navigator
+			tabBarOptions={{
+				showLabel: false,
+				style: { borderTopWidth: 0.5, borderTopColor: "#ffffff20" },
+			}}
+		>
 			<Tab.Screen
 				name="Instagram"
 				component={HomeScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
 						!focused ? (
-							<MaterialCommunityIcons
-								name="home-outline"
-								size={25}
-								color="black"
-							/>
+							<Ionicons name="home-outline" size={26} color={Colors.light} />
 						) : (
-							<Foundation name="home" size={25} color="black" />
+							<Ionicons name="home" size={26} color={Colors.light} />
 						),
 				}}
 			/>
@@ -42,10 +41,10 @@ const AppNavigator = () => {
 				component={DiscoveryScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
-						!focused ? (
-							<Feather name="search" size={25} color="black" />
+						focused ? (
+							<Feather name="search" size={26} color={Colors.light} />
 						) : (
-							<FontAwesome name="search" size={25} color="black" />
+							<Ionicons name="ios-search" size={26} color={Colors.light} />
 						),
 				}}
 			/>
@@ -54,10 +53,14 @@ const AppNavigator = () => {
 				component={NewPostScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
-						!focused ? (
-							<Feather name="plus-square" size={25} color="black" />
+						focused ? (
+							<FontAwesome name="plus-square" size={26} color={Colors.light} />
 						) : (
-							<FontAwesome5 name="plus-square" size={24} color="black" />
+							<FontAwesome
+								name="plus-square-o"
+								size={26}
+								color={Colors.light}
+							/>
 						),
 				}}
 			/>
@@ -67,9 +70,17 @@ const AppNavigator = () => {
 				options={{
 					tabBarIcon: ({ focused }) =>
 						!focused ? (
-							<AntDesign name="hearto" size={25} color="black" />
+							<MaterialCommunityIcons
+								name="heart-outline"
+								size={26}
+								color={Colors.light}
+							/>
 						) : (
-							<AntDesign name="heart" size={25} color="black" />
+							<MaterialCommunityIcons
+								name="heart"
+								size={26}
+								color={Colors.light}
+							/>
 						),
 				}}
 			/>
@@ -79,9 +90,17 @@ const AppNavigator = () => {
 				options={{
 					tabBarIcon: ({ focused }) =>
 						!focused ? (
-							<Ionicons name="person-outline" size={25} color="black" />
+							<MaterialCommunityIcons
+								name="account-circle-outline"
+								size={26}
+								color={Colors.light}
+							/>
 						) : (
-							<Ionicons name="person" size={25} color="black" />
+							<MaterialCommunityIcons
+								name="account-circle"
+								size={26}
+								color={Colors.light}
+							/>
 						),
 				}}
 			/>

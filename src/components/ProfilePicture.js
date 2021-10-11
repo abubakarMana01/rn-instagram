@@ -3,6 +3,8 @@ import { StyleSheet, View, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 
+import { Colors } from "../config";
+
 const Story = ({
 	imageUri,
 	width = 70,
@@ -21,7 +23,6 @@ const Story = ({
 							width,
 							height,
 							borderRadius: width / 2,
-							borderColor: borderVisible ? "purple" : "#fff",
 						},
 					]}
 				>
@@ -47,7 +48,11 @@ const Story = ({
 					/>
 					{showPlus && (
 						<View style={styles.plusIcon}>
-							<MaterialCommunityIcons name="plus" size={15} color="#fff" />
+							<MaterialCommunityIcons
+								name="plus"
+								size={15}
+								color={Colors.light}
+							/>
 						</View>
 					)}
 				</View>
@@ -68,16 +73,15 @@ const styles = StyleSheet.create({
 		width: "100%",
 		height: "100%",
 		padding: 3,
-		margin: 0,
-		backgroundColor: "#fff",
+		backgroundColor: Colors.dark,
 	},
 	plusIcon: {
 		position: "absolute",
-		right: 0,
-		bottom: 0,
+		right: 3,
+		bottom: 3,
 		backgroundColor: "dodgerblue",
 		borderRadius: 50,
-		borderWidth: 3,
-		borderColor: "#fff",
+		borderWidth: 2,
+		borderColor: Colors.dark,
 	},
 });

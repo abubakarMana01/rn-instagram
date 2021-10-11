@@ -1,12 +1,5 @@
 import React from "react";
-import {
-	SafeAreaView,
-	FlatList,
-	View,
-	StyleSheet,
-	Platform,
-	StatusBar,
-} from "react-native";
+import { FlatList, View, StyleSheet } from "react-native";
 import HomeCustomHeader from "../components/HomeCustomHeader";
 
 import Post from "../components/Post";
@@ -173,25 +166,21 @@ const posts = [
 
 const HomeScreen = ({ navigation }) => {
 	return (
-		<SafeAreaView style={styles.container}>
+		<View style={styles.container}>
 			<HomeCustomHeader messagePress={() => navigation.navigate("Messages")} />
-			<View>
-				<FlatList
-					keyExtractor={item => item.key.toString()}
-					data={posts}
-					renderItem={({ item }) => <Post post={item} />}
-					ListHeaderComponent={Stories}
-				/>
-			</View>
-		</SafeAreaView>
+			<FlatList
+				showsVerticalScrollIndicator={false}
+				keyExtractor={item => item.key.toString()}
+				data={posts}
+				renderItem={({ item }) => <Post post={item} />}
+				ListHeaderComponent={Stories}
+			/>
+		</View>
 	);
 };
 
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: "#fff",
-		paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-	},
+	container: { flex: 1 },
 });

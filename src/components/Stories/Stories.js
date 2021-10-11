@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, FlatList, Text, Image } from "react-native";
 
 import stories from "../../../assets/data/stories";
+import { Colors } from "../../config";
 import ProfilePicture from "../ProfilePicture";
 
 const Stories = () => {
@@ -9,7 +10,7 @@ const Stories = () => {
 		<View style={styles.container}>
 			<FlatList
 				ListHeaderComponent={() => (
-					<>
+					<View style={[styles.storyContainer, { marginLeft: 10 }]}>
 						<ProfilePicture
 							borderVisible={false}
 							showPlus={true}
@@ -20,7 +21,7 @@ const Stories = () => {
 						<Text style={{ textAlign: "center" }} numberOfLines={1}>
 							Your story
 						</Text>
-					</>
+					</View>
 				)}
 				horizontal
 				showsHorizontalScrollIndicator={false}
@@ -32,7 +33,9 @@ const Stories = () => {
 							imageUri={item.stories[0].imageUri}
 							style={{ width: 30, height: 30 }}
 						/>
-						<Text numberOfLines={1}>{item.user.name}</Text>
+						<Text style={styles.name} numberOfLines={1}>
+							{item.user.name}
+						</Text>
 					</View>
 				)}
 			/>
@@ -44,16 +47,20 @@ export default Stories;
 
 const styles = StyleSheet.create({
 	container: {
-		paddingVertical: 10,
-		paddingLeft: 10,
-		backgroundColor: "#00000003",
-		borderColor: "#00000005",
-		borderTopWidth: 2,
-		borderBottomWidth: 2,
+		paddingVertical: 7,
+		backgroundColor: Colors.dark,
+		borderColor: "#303030",
+		borderBottomWidth: 0.5,
 		flexDirection: "row",
 	},
 	storyContainer: {
 		marginHorizontal: 5,
 		alignItems: "center",
+		width: 70,
+	},
+	name: {
+		color: Colors.light,
+		marginTop: 3,
+		fontSize: 14,
 	},
 });

@@ -1,39 +1,26 @@
 import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { Colors, Styles } from "../config";
 
 const HomeCustomHeader = ({ messagePress }) => {
 	return (
-		<View
-			style={{
-				backgroundColor: "#fff",
-				flexDirection: "row",
-				alignItems: "center",
-				justifyContent: "space-between",
-				height: 55,
-				borderBottomColor: "#eee",
-				borderBottomWidth: 1,
-				width: "100%",
-				paddingHorizontal: 10,
-			}}
-		>
+		<View style={styles.container}>
 			<Image
-				style={{
-					width: 150,
-					height: 50,
-				}}
+				style={styles.icon}
 				resizeMode="contain"
-				source={require("../../assets/images/logo.png")}
+				source={require("../../assets/images/header-logo.png")}
 			/>
 			<View style={styles.headerIcons}>
 				<TouchableOpacity style={styles.iconContainer}>
-					<Feather name="plus-square" size={25} color="black" />
+					<FontAwesome name="plus-square-o" size={26} color={Colors.light} />
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.iconContainer} onPress={messagePress}>
 					<MaterialCommunityIcons
 						name="facebook-messenger"
 						size={25}
-						color="black"
+						color={Colors.light}
 					/>
 				</TouchableOpacity>
 			</View>
@@ -44,6 +31,24 @@ const HomeCustomHeader = ({ messagePress }) => {
 export default HomeCustomHeader;
 
 const styles = StyleSheet.create({
-	headerIcons: { flexDirection: "row" },
-	iconContainer: { marginHorizontal: 7 },
+	container: {
+		height: 55,
+		backgroundColor: Colors.dark,
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "space-between",
+		borderBottomWidth: 0,
+		width: "100%",
+		paddingHorizontal: 10,
+	},
+	headerIcons: {
+		flexDirection: "row",
+	},
+	iconContainer: {
+		marginHorizontal: 11,
+	},
+	icon: {
+		width: 115,
+		height: 50,
+	},
 });

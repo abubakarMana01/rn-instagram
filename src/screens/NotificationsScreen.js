@@ -1,11 +1,19 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	View,
+	SafeAreaView,
+	Platform,
+	StatusBar,
+} from "react-native";
+import Colors from "../config/Colors";
 
 const NotificationsScreen = () => {
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<Text>Notifications</Text>
-		</View>
+		</SafeAreaView>
 	);
 };
 
@@ -16,6 +24,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "#e73838",
+		backgroundColor: Colors.light,
+		paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
 	},
 });

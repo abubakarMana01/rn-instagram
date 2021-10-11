@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, Dimensions } from "react-native";
+import { Colors } from "../../config";
 
 const PostImage = ({ post }) => {
 	return (
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
 	container: {
 		width: Dimensions.get("window").width,
 		maxHeight: Dimensions.get("window").width,
+		backgroundColor: Colors.lightgrey,
 	},
 	image: {
 		width: "100%",

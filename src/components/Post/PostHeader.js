@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import ProfilePicture from "../ProfilePicture";
+import { Colors, Styles } from "../../config";
 
 const PostHeader = ({ post }) => {
 	return (
@@ -11,7 +12,11 @@ const PostHeader = ({ post }) => {
 				<ProfilePicture imageUri={post.user.imageUri} width={40} height={40} />
 				<Text style={styles.username}>{post.user.username}</Text>
 			</View>
-			<MaterialCommunityIcons name="dots-vertical" size={24} color="black" />
+			<MaterialCommunityIcons
+				name="dots-vertical"
+				size={24}
+				color={Colors.light}
+			/>
 		</View>
 	);
 };
@@ -22,7 +27,8 @@ const styles = StyleSheet.create({
 	container: {
 		alignItems: "center",
 		flexDirection: "row",
-		padding: 10,
+		paddingHorizontal: 10,
+		paddingVertical: 5,
 	},
 	profile: {
 		width: "100%",
@@ -32,8 +38,9 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	username: {
-		fontWeight: "700",
-		fontSize: 14,
-		marginLeft: 5,
+		fontWeight: Styles.bold,
+		fontSize: 16,
+		marginLeft: 7,
+		color: Colors.light,
 	},
 });

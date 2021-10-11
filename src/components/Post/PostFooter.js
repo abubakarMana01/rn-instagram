@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
+import { Colors, Styles } from "../../config";
 const PostFooter = ({ post }) => {
 	const [isLiked, setIsLiked] = useState(false);
 	const [likesCount, setLikesCount] = useState(post.likes);
@@ -25,28 +26,32 @@ const PostFooter = ({ post }) => {
 							{isLiked ? (
 								<Ionicons name="heart" size={30} color="#e73838" />
 							) : (
-								<Ionicons name="heart-outline" size={30} color="#545454" />
+								<Ionicons name="heart-outline" size={30} color={Colors.light} />
 							)}
 						</TouchableWithoutFeedback>
 					</View>
 					<View style={styles.icon}>
-						<FontAwesome name="comment-o" size={25} color="#545454" />
+						<FontAwesome name="comment-o" size={25} color={Colors.light} />
 					</View>
 					<View style={styles.icon}>
 						<Ionicons
 							name="ios-paper-plane-outline"
 							size={25}
-							color="#545454"
+							color={Colors.light}
 						/>
 					</View>
 				</View>
 
-				<View style={styles.icon}>
+				<View style={styles.bookmarkIcon}>
 					<TouchableWithoutFeedback onPress={handleBookmark}>
 						{isBookmarked ? (
-							<Ionicons name="bookmark" size={25} color="#000" />
+							<Ionicons name="bookmark" size={25} color={Colors.light} />
 						) : (
-							<Ionicons name="bookmark-outline" size={25} color="#545454" />
+							<Ionicons
+								name="bookmark-outline"
+								size={25}
+								color={Colors.light}
+							/>
 						)}
 					</TouchableWithoutFeedback>
 				</View>
@@ -73,25 +78,38 @@ const styles = StyleSheet.create({
 	},
 	iconsLeft: {
 		flexDirection: "row",
-		alignItems: "flex-start",
+		alignItems: "center",
 		flex: 1,
 	},
 	icon: {
-		marginRight: 15,
+		marginRight: 13,
+		width: 30,
+		height: 30,
+		justifyContent: "center",
+		alignItems: "center",
+	},
+	bookmarkIcon: {
+		width: 30,
+		height: 30,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	likes: {
-		fontWeight: "bold",
+		fontWeight: Styles.bold,
 		marginVertical: 5,
+		color: Colors.light,
 	},
 	username: {
-		fontWeight: "bold",
+		fontWeight: Styles.bold,
 	},
 	caption: {
-		fontWeight: "400",
+		fontWeight: Styles.normal,
+		color: Colors.light,
 	},
 	timePosted: {
-		color: "#00000075",
-		fontSize: 12,
+		color: Colors.grey,
+		fontSize: 11,
 		marginTop: 5,
+		fontWeight: Styles.normal,
 	},
 });

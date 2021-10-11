@@ -2,18 +2,15 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import MessagesScreen from "../screens/MessagesScreen";
-import AppNavigator from "./AppNavigator";
+import AppNavigator from "./AppBottomTabs";
 
 const HomeStackNavigator = () => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator
-			headerMode="screen"
-			screenOptions={{ cardStyle: { backgroundColor: "#fff" } }}
-		>
+		<Stack.Navigator>
 			<Stack.Screen
-				name="Home"
+				name="Feeds"
 				component={AppNavigator}
 				options={() => ({
 					headerShown: false,
@@ -22,7 +19,7 @@ const HomeStackNavigator = () => {
 			<Stack.Screen
 				name="Messages"
 				component={MessagesScreen}
-				options={{ headerShown: true }}
+				options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
 	);

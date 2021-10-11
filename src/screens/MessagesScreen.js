@@ -1,11 +1,23 @@
-import React from "react";
-import { StyleSheet, View, Button } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { useEffect } from "react";
+import { StyleSheet, SafeAreaView, ScrollView, LogBox } from "react-native";
 
-const MessagesScreen = () => {
-	const navigation = useNavigation();
+import { Colors } from "../config";
+import MessagesCustomHeader from "../components/Messages/MessagesCustomHeader";
+import MessagesTopTabs from "../navigators/MessagesTopTabs";
 
-	return <View style={styles.container}></View>;
+const MessagesScreen = ({ navigation }) => {
+	useEffect(() => {
+		LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+	}, []);
+
+	return (
+		<SafeAreaView style={styles.container}>
+			<MessagesCustomHeader handleBackNavigation={() => navigation.goBack()} />
+			<ScrollView>
+				<MessagesTopTabs />
+			</ScrollView>
+		</SafeAreaView>
+	);
 };
 
 export default MessagesScreen;
