@@ -1,19 +1,21 @@
 import React from "react";
-import {
-	StyleSheet,
-	Text,
-	View,
-	SafeAreaView,
-	Platform,
-	StatusBar,
-} from "react-native";
-import Colors from "../config/Colors";
+import { ScrollView, StyleSheet, View } from "react-native";
+
+import AccountCustomHeader from "../components/Account/AccountCustomHeader";
+import AccountSocialInfo from "../components/Account/AccountSocialInfo";
+import AccountBio from "../components/Account/AccountBio";
+import AccountChooseOptions from "../components/Account/AccountChooseOptions";
+import AccountTopTabNavigator from "../navigators/AccountTopTabs";
 
 const AccountScreen = () => {
 	return (
-		<SafeAreaView style={styles.container}>
-			<Text>Account</Text>
-		</SafeAreaView>
+		<View style={styles.container}>
+			<AccountCustomHeader />
+			<AccountSocialInfo />
+			<AccountBio />
+			<AccountChooseOptions />
+			<AccountTopTabNavigator />
+		</View>
 	);
 };
 
@@ -22,9 +24,5 @@ export default AccountScreen;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: Colors.light,
-		paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
 	},
 });

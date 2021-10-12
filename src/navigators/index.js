@@ -10,11 +10,11 @@ import { useAuthContext } from "../contexts/AuthProvider";
 
 export default function App() {
 	const { currentUser, setCurrentUser } = useAuthContext();
+	LogBox.ignoreLogs(["Setting a timer"]);
 
 	// Set an initializing state whilst Firebase connects
 	const [initializing, setInitializing] = useState(true);
 
-	// Handle user state changes
 	function onAuthStateChanged(user) {
 		setCurrentUser(user);
 
@@ -27,7 +27,7 @@ export default function App() {
 		const subscriber = auth.onAuthStateChanged(onAuthStateChanged);
 
 		return subscriber;
-	});
+	}, []);
 
 	if (initializing) return null;
 

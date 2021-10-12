@@ -1,6 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TouchableWithoutFeedback } from "react-native";
-import { FontAwesome, Ionicons } from "@expo/vector-icons";
+import {
+	StyleSheet,
+	Text,
+	View,
+	TouchableWithoutFeedback,
+	Image,
+} from "react-native";
+import {
+	FontAwesome,
+	Ionicons,
+	MaterialCommunityIcons,
+	SimpleLineIcons,
+} from "@expo/vector-icons";
 
 import { Colors, Styles } from "../../config";
 const PostFooter = ({ post }) => {
@@ -24,32 +35,55 @@ const PostFooter = ({ post }) => {
 					<View style={styles.icon}>
 						<TouchableWithoutFeedback onPress={handleLike}>
 							{isLiked ? (
-								<Ionicons name="heart" size={30} color="#e73838" />
+								<MaterialCommunityIcons
+									name="heart"
+									size={30}
+									color="#e73838"
+								/>
 							) : (
-								<Ionicons name="heart-outline" size={30} color={Colors.light} />
+								<MaterialCommunityIcons
+									name="heart-outline"
+									size={30}
+									color={Colors.light}
+								/>
 							)}
 						</TouchableWithoutFeedback>
 					</View>
 					<View style={styles.icon}>
-						<FontAwesome name="comment-o" size={25} color={Colors.light} />
+						<Image
+							style={styles.iconImage}
+							source={{
+								uri: "https://img.icons8.com/material-outlined/60/ffffff/speech.png",
+							}}
+						/>
 					</View>
 					<View style={styles.icon}>
-						<Ionicons
-							name="ios-paper-plane-outline"
-							size={25}
+						<SimpleLineIcons
+							name="paper-plane"
+							size={24}
 							color={Colors.light}
 						/>
+						{/* <Image
+							style={styles.iconImage}
+							source={{
+								uri: "https://img.icons8.com/fluency-systems-regular/60/ffffff/paper-plane.png",
+							}}
+						/> */}
 					</View>
 				</View>
 
 				<View style={styles.bookmarkIcon}>
 					<TouchableWithoutFeedback onPress={handleBookmark}>
 						{isBookmarked ? (
-							<Ionicons name="bookmark" size={25} color={Colors.light} />
+							<MaterialCommunityIcons
+								name="bookmark"
+								size={28}
+								color={Colors.light}
+							/>
 						) : (
-							<Ionicons
+							<MaterialCommunityIcons
 								name="bookmark-outline"
-								size={25}
+								size={28}
 								color={Colors.light}
 							/>
 						)}
@@ -82,11 +116,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	icon: {
-		marginRight: 13,
+		marginRight: 15,
 		width: 30,
 		height: 30,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	iconImage: {
+		width: "100%",
+		height: "100%",
 	},
 	bookmarkIcon: {
 		width: 30,

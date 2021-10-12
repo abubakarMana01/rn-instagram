@@ -1,27 +1,23 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-	Feather,
-	Ionicons,
-	FontAwesome,
-	MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import NewPostScreen from "../screens/NewPostScreen";
+import ReelsScreen from "../screens/ReelsScreen";
 import DiscoveryScreen from "../screens/DiscoveryScreen";
 import AccountScreen from "../screens/AccountScreen";
 import NotificationsScreen from "../screens/NotificationsScreen";
 import HomeScreen from "../screens/HomeScreen";
 import { Colors } from "../config";
+import { Image } from "react-native";
 
-const AppNavigator = () => {
+export default function AppNavigator() {
 	const Tab = createBottomTabNavigator();
 
 	return (
 		<Tab.Navigator
 			tabBarOptions={{
 				showLabel: false,
-				style: { borderTopWidth: 0.5, borderTopColor: "#ffffff20" },
+				style: { borderTopWidth: 0.5, borderTopColor: "#ffffff20", height: 50 },
 			}}
 		>
 			<Tab.Screen
@@ -29,10 +25,20 @@ const AppNavigator = () => {
 				component={HomeScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
-						!focused ? (
-							<Ionicons name="home-outline" size={26} color={Colors.light} />
+						focused ? (
+							<Image
+								source={{
+									uri: "https://img.icons8.com/fluency-systems-filled/144/ffffff/home.png",
+								}}
+								style={{ width: 26, height: 26 }}
+							/>
 						) : (
-							<Ionicons name="home" size={26} color={Colors.light} />
+							<Image
+								source={{
+									uri: "https://img.icons8.com/fluency-systems-regular/48/ffffff/home.png",
+								}}
+								style={{ width: 26, height: 26 }}
+							/>
 						),
 				}}
 			/>
@@ -42,24 +48,40 @@ const AppNavigator = () => {
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? (
-							<Feather name="search" size={26} color={Colors.light} />
+							<Image
+								source={{
+									uri: "https://img.icons8.com/ios-filled/500/ffffff/search--v1.png",
+								}}
+								style={{ width: 26, height: 26 }}
+							/>
 						) : (
-							<Ionicons name="ios-search" size={26} color={Colors.light} />
+							<Image
+								source={{
+									uri: "https://img.icons8.com/ios/500/ffffff/search--v1.png",
+								}}
+								style={{ width: 26, height: 26 }}
+							/>
 						),
 				}}
 			/>
 			<Tab.Screen
-				name="Post"
-				component={NewPostScreen}
+				name="Reels"
+				component={ReelsScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? (
-							<FontAwesome name="plus-square" size={26} color={Colors.light} />
+							<Image
+								source={{
+									uri: "https://img.icons8.com/ios-filled/50/ffffff/instagram-reel.png",
+								}}
+								style={{ width: 26, height: 26 }}
+							/>
 						) : (
-							<FontAwesome
-								name="plus-square-o"
-								size={26}
-								color={Colors.light}
+							<Image
+								source={{
+									uri: "https://img.icons8.com/ios/500/ffffff/instagram-reel.png",
+								}}
+								style={{ width: 26, height: 26 }}
 							/>
 						),
 				}}
@@ -69,17 +91,19 @@ const AppNavigator = () => {
 				component={NotificationsScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
-						!focused ? (
-							<MaterialCommunityIcons
-								name="heart-outline"
-								size={26}
-								color={Colors.light}
+						focused ? (
+							<Image
+								source={{
+									uri: "https://img.icons8.com/fluency-systems-filled/48/ffffff/shopping-bag-full.png",
+								}}
+								style={{ width: 26, height: 26 }}
 							/>
 						) : (
-							<MaterialCommunityIcons
-								name="heart"
-								size={26}
-								color={Colors.light}
+							<Image
+								source={{
+									uri: "https://img.icons8.com/fluency-systems-regular/48/ffffff/shopping-bag-full.png",
+								}}
+								style={{ width: 26, height: 26 }}
 							/>
 						),
 				}}
@@ -106,6 +130,4 @@ const AppNavigator = () => {
 			/>
 		</Tab.Navigator>
 	);
-};
-
-export default AppNavigator;
+}

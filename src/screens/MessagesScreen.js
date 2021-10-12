@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { StyleSheet, SafeAreaView, ScrollView, LogBox } from "react-native";
 
-import { Colors } from "../config";
 import MessagesCustomHeader from "../components/Messages/MessagesCustomHeader";
 import MessagesTopTabs from "../navigators/MessagesTopTabs";
 
 const MessagesScreen = ({ navigation }) => {
 	useEffect(() => {
-		LogBox.ignoreLogs(["VirtualizedLists should never be nested"]);
+		LogBox.ignoreLogs([
+			"VirtualizedLists should never be nested inside plain ScrollViews with the same orientation",
+		]);
 	}, []);
 
 	return (

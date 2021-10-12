@@ -3,16 +3,20 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { Feather, MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 
 import { Colors, Styles } from "../../config";
+import { useAuthContext } from "../../contexts/AuthProvider";
 
 const MessagesCustomHeader = ({ messagePress, handleBackNavigation }) => {
+	const { currentUser } = useAuthContext();
 	return (
 		<View style={styles.container}>
 			<View style={styles.headerLeft}>
-				<TouchableOpacity onPress={handleBackNavigation}>
+				<TouchableOpacity activeOpacity={1} onPress={handleBackNavigation}>
 					<AntDesign name="arrowleft" size={25} color={Colors.light} />
 				</TouchableOpacity>
 				<Text numberOfLines={1} style={styles.username}>
-					abubakr_mana_
+					{currentUser.displayName
+						? currentUser.displayName
+						: currentUser.email}
 				</Text>
 				<MaterialCommunityIcons
 					name="chevron-down"

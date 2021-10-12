@@ -22,10 +22,11 @@ const HomeCustomHeader = ({ messagePress }) => {
 					<FontAwesome name="plus-square-o" size={26} color={Colors.light} />
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.iconContainer} onPress={messagePress}>
-					<MaterialCommunityIcons
-						name="facebook-messenger"
-						size={25}
-						color={Colors.light}
+					<Image
+						source={{
+							uri: "https://img.icons8.com/fluency-systems-regular/60/ffffff/facebook-messenger.png",
+						}}
+						style={{ width: 26, height: 26 }}
 					/>
 				</TouchableOpacity>
 			</View>

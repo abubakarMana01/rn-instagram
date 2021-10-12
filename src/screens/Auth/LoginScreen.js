@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
 	StyleSheet,
 	Image,
@@ -19,6 +19,8 @@ import ErrorMessage from "../../components/Auth/ErrorMessage";
 import { auth } from "../../config/firebase";
 
 export default function LoginScreen({ navigation }) {
+	const [isLoading, setIsLoading] = useState(false);
+
 	const validationSchema = Yup.object().shape({
 		email: Yup.string().required().min(3).email().trim().label("Email"),
 		password: Yup.string().required().min(6).max(255).label("Password"),
@@ -26,11 +28,13 @@ export default function LoginScreen({ navigation }) {
 
 	const handleSubmit = async values => {
 		try {
+			setIsLoading(true);
 			const cred = await auth.signInWithEmailAndPassword(
 				values.email,
 				values.password
 			);
 		} catch (error) {
+			setIsLoading(false);
 			console.log(error.message);
 		}
 	};
@@ -81,12 +85,17 @@ export default function LoginScreen({ navigation }) {
 								<Text style={styles.forgotPasswordText}>Forgot Password?</Text>
 							</View>
 							<View style={styles.buttonContainer}>
-								<AuthButton title="Log In" onPress={handleSubmit} />
+								<AuthButton
+									title="Log In"
+									onPress={handleSubmit}
+									isLoading={isLoading}
+								/>
 							</View>
 						</View>
 					)}
 				</Formik>
 				<TouchableOpacity
+					activeOpacity={0.5}
 					style={styles.authOption}
 					onPress={() => navigation.navigate("Signup")}
 				>
