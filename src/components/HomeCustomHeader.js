@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
-import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 
 import { Colors } from "../config";
 import { auth } from "../config/firebase";

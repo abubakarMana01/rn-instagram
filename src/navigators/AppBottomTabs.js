@@ -27,16 +27,12 @@ export default function AppNavigator() {
 					tabBarIcon: ({ focused }) =>
 						focused ? (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/fluency-systems-filled/144/ffffff/home.png",
-								}}
+								source={require("../../assets/images/Icons/home.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						) : (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/fluency-systems-regular/48/ffffff/home.png",
-								}}
+								source={require("../../assets/images/Icons/home-outline.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						),
@@ -49,16 +45,12 @@ export default function AppNavigator() {
 					tabBarIcon: ({ focused }) =>
 						focused ? (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/ios-filled/500/ffffff/search--v1.png",
-								}}
+								source={require("../../assets/images/Icons/search.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						) : (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/ios/500/ffffff/search--v1.png",
-								}}
+								source={require("../../assets/images/Icons/search-outline.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						),
@@ -71,16 +63,12 @@ export default function AppNavigator() {
 					tabBarIcon: ({ focused }) =>
 						focused ? (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/ios-filled/50/ffffff/instagram-reel.png",
-								}}
+								source={require("../../assets/images/Icons/reel.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						) : (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/ios/500/ffffff/instagram-reel.png",
-								}}
+								source={require("../../assets/images/Icons/reel-outline.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						),
@@ -93,16 +81,12 @@ export default function AppNavigator() {
 					tabBarIcon: ({ focused }) =>
 						focused ? (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/fluency-systems-filled/48/ffffff/shopping-bag-full.png",
-								}}
+								source={require("../../assets/images/Icons/shopping-bag.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						) : (
 							<Image
-								source={{
-									uri: "https://img.icons8.com/fluency-systems-regular/48/ffffff/shopping-bag-full.png",
-								}}
+								source={require("../../assets/images/Icons/shopping-bag-outline.png")}
 								style={{ width: 26, height: 26 }}
 							/>
 						),
