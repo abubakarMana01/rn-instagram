@@ -1,18 +1,22 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
 	StyleSheet,
-	Text,
-	Image,
-	ImageBackground,
+	StatusBar,
 	FlatList,
 	View,
 	Dimensions,
+	TouchableOpacity,
+	SafeAreaView,
+	Platform,
 } from "react-native";
+import { Video } from "expo-av";
+import Vid from "react-native-video";
 
 import { Colors } from "../config";
 import ReelsHeader from "../components/Reels/ReelsHeader";
 import ReelSideBar from "../components/Reels/ReelSideBar";
 import ReelFooterContent from "../components/Reels/ReelFooterContent";
+import AppLoadingAnimation from "../components/AppLoadingAnimation";
 
 const posts = [
 	{
@@ -75,99 +79,19 @@ const posts = [
 		likes: 421,
 		key: 5,
 	},
-	{
-		user: {
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-			username: "memphisdepay",
-		},
-		imageUri:
-			"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		caption: "Beautiful city #instagram",
-		likes: 1323423,
-		key: 6,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-			username: "abubakarMana01",
-		},
-		imageUri:
-			"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-		caption: "Beautiful city #instagram",
-		likes: 421,
-		key: 7,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-			username: "memphisdepay",
-		},
-		imageUri:
-			"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		caption: "Beautiful city #instagram",
-		likes: 1323423,
-		postedAt: "10 minutes ago",
-		key: 8,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-			username: "abubakarMana01",
-		},
-		imageUri:
-			"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-		caption: "Beautiful city #instagram",
-		likes: 421,
-		postedAt: "8 minutes ago",
-		key: 9,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-			username: "memphisdepay",
-		},
-		imageUri:
-			"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		caption: "Beautiful city #instagram",
-		likes: 1323423,
-		postedAt: "10 minutes ago",
-		key: 10,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-			username: "abubakarMana01",
-		},
-		imageUri:
-			"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-		caption: "Beautiful city #instagram",
-		likes: 421,
-		postedAt: "8 minutes ago",
-		key: 11,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-			username: "memphisdepay",
-		},
-		imageUri:
-			"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		caption: "Beautiful city #instagram",
-		likes: 1323423,
-		key: 12,
-	},
 ];
 
 export default function ReelsScreen() {
+	const video = useRef(null);
+	const [shouldPlay, setShouldPlay] = useState(false);
+
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
+			<StatusBar
+				backgroundColor={Colors.dark}
+				animated
+				barStyle="light-content"
+			/>
 			<View style={styles.reelsHeaderContainer}>
 				<ReelsHeader />
 			</View>
@@ -177,21 +101,34 @@ export default function ReelsScreen() {
 				keyExtractor={item => item.key.toString()}
 				renderItem={({ item }) => (
 					<View style={styles.reelContainer}>
-						<ImageBackground
-							source={{ uri: item.imageUri }}
-							style={styles.reelBackground}
-						>
+						<View style={styles.reelBackground}>
+							<TouchableOpacity
+								activeOpacity={0.8}
+								style={styles.videoContainer}
+								onPress={() => {
+									setShouldPlay(!shouldPlay);
+								}}
+							>
+								<Video
+									ref={video}
+									style={styles.video}
+									source={require("../../assets/videos/reel.mp4")}
+									resizeMode="contain"
+									isLooping={false}
+									shouldPlay={shouldPlay}
+								/>
+							</TouchableOpacity>
 							<View style={styles.reelFooterContainer}>
 								<ReelFooterContent reel={item} />
 							</View>
 							<View style={styles.reelSideBarContainer}>
 								<ReelSideBar />
 							</View>
-						</ImageBackground>
+						</View>
 					</View>
 				)}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 }
 
@@ -200,7 +137,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	reelContainer: {
-		height: Dimensions.get("window").height - 50,
+		height:
+			Platform.OS === "ios"
+				? Dimensions.get("window").height - 70
+				: Dimensions.get("window").height - 50,
 		backgroundColor: Colors.dark,
 	},
 	reelBackground: {
@@ -226,5 +166,17 @@ const styles = StyleSheet.create({
 		position: "absolute",
 		right: 0,
 		bottom: 0,
+	},
+
+	video: {
+		alignSelf: "center",
+		flex: 1,
+		height: "100%",
+		width: "100%",
+	},
+	videoContainer: {
+		position: "absolute",
+		width: "100%",
+		height: "100%",
 	},
 });

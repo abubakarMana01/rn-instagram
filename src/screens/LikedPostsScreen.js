@@ -39,7 +39,7 @@ export default function LikedPostsScreen({ navigation }) {
 
 	return (
 		<View style={styles.container}>
-			<PostsCustomHeader navigation={navigation} headerTitle="Liked posts" />
+			<PostsCustomHeader navigation={navigation} headerTitle="Liked Posts" />
 			{isLoading ? (
 				<AppLoadingAnimation />
 			) : (

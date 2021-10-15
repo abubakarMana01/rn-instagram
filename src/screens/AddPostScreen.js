@@ -8,6 +8,8 @@ import {
 	Text,
 	ToastAndroid,
 	Image,
+	Dimensions,
+	ScrollView,
 } from "react-native";
 import firebase from "firebase/app";
 import { Formik } from "formik";
@@ -74,74 +76,72 @@ export default function AddPostScreen({ navigation }) {
 	};
 
 	return (
-		<View style={styles.container}>
-			<PostsCustomHeader navigation={navigation} headerTitle="New Post" />
-			<Formik
-				initialValues={{ caption: "" }}
-				validationSchema={validationSchema}
-				onSubmit={handleSubmit}
-			>
-				{({ handleSubmit, handleChange, errors, values }) => (
-					<>
-						<View style={styles.inputsContainer}>
-							<TouchableOpacity
-								style={styles.imageUploadContainer}
-								onPress={openImagePickerAsync}
-							>
-								{!imageUrl ? (
-									<MaterialCommunityIcons
-										name="camera"
-										color={Colors.darkGrey}
-										size={40}
+		<ScrollView>
+			<View style={styles.container}>
+				<PostsCustomHeader navigation={navigation} headerTitle="New Post" />
+				<Formik
+					initialValues={{ caption: "" }}
+					validationSchema={validationSchema}
+					onSubmit={handleSubmit}
+				>
+					{({ handleSubmit, handleChange, errors, values }) => (
+						<>
+							<View style={styles.inputsContainer}>
+								<TouchableOpacity
+									style={styles.imageUploadContainer}
+									onPress={openImagePickerAsync}
+								>
+									{!imageUrl ? (
+										<MaterialCommunityIcons
+											name="camera"
+											color={Colors.darkGrey}
+											size={100}
+										/>
+									) : (
+										<Image
+											source={{ uri: imageUrl }}
+											style={{ width: "100%", height: "100%" }}
+										/>
+									)}
+								</TouchableOpacity>
+								<View style={styles.textInputContainer}>
+									<TextInput
+										multiline
+										style={styles.textInput}
+										placeholder="Write a caption..."
+										placeholderTextColor={Colors.grey}
+										value={values.caption}
+										onChangeText={handleChange("caption")}
 									/>
-								) : (
-									<Image
-										source={{ uri: imageUrl }}
-										style={{ width: "100%", height: "100%" }}
-									/>
-								)}
-							</TouchableOpacity>
-							<View style={styles.textInputContainer}>
-								<TextInput
-									multiline
-									style={styles.textInput}
-									placeholder="Write a caption..."
-									placeholderTextColor={Colors.grey}
-									value={values.caption}
-									onChangeText={handleChange("caption")}
-								/>
-								{errors.caption && <ErrorMessage error={errors.caption} />}
+									{errors.caption && <ErrorMessage error={errors.caption} />}
+								</View>
 							</View>
-						</View>
-
-						<TouchableOpacity
-							style={styles.shareButtonContainer}
-							onPress={handleSubmit}
-						>
-							<Text style={styles.shareText}>Share</Text>
-						</TouchableOpacity>
-					</>
-				)}
-			</Formik>
-		</View>
+							<TouchableOpacity
+								style={styles.shareButtonContainer}
+								onPress={handleSubmit}
+							>
+								<Text style={styles.shareText}>Share</Text>
+							</TouchableOpacity>
+						</>
+					)}
+				</Formik>
+			</View>
+		</ScrollView>
 	);
 }
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		alignItems: "center",
+		paddingHorizontal: 20,
 	},
 	inputsContainer: {
-		flexDirection: "row",
 		paddingTop: 20,
-		paddingBottom: 25,
-		borderBottomColor: Colors.grey,
-		borderBottomWidth: 1,
-		marginHorizontal: 15,
 	},
 	imageUploadContainer: {
-		width: 100,
-		height: 100,
+		width: Dimensions.get("window").width - 20,
+		height: Dimensions.get("window").width - 20,
 		overflow: "hidden",
 		borderRadius: 10,
 		backgroundColor: Colors.lightgrey,
@@ -149,21 +149,26 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	textInputContainer: {
-		flex: 1,
 		height: 40,
-		marginLeft: 15,
+		borderColor: Colors.grey,
+		borderRadius: 4,
+		borderWidth: 1,
+		marginTop: 20,
+		justifyContent: "center",
 	},
 	textInput: {
 		height: "100%",
 		fontSize: 16,
 		color: Colors.light,
+		paddingHorizontal: 10,
 	},
 	shareButtonContainer: {
-		marginTop: 35,
+		marginTop: 10,
 		alignSelf: "center",
 	},
 	shareText: {
 		color: Colors.light,
 		fontSize: 18,
+		fontWeight: "600",
 	},
 });
