@@ -10,13 +10,11 @@ import {
 	Platform,
 } from "react-native";
 import { Video } from "expo-av";
-import Vid from "react-native-video";
 
 import { Colors } from "../config";
 import ReelsHeader from "../components/Reels/ReelsHeader";
 import ReelSideBar from "../components/Reels/ReelSideBar";
 import ReelFooterContent from "../components/Reels/ReelFooterContent";
-import AppLoadingAnimation from "../components/AppLoadingAnimation";
 
 const posts = [
 	{
@@ -25,8 +23,8 @@ const posts = [
 				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
 			username: "abubakarMana01",
 		},
-		imageUri:
-			"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
+		videoUrl:
+			"https://v16m.tiktokcdn.com/d71f7f6634b4d35e4d3d77fbb68d1cb7/616a5813/video/tos/useast2a/tos-useast2a-ve-0068c002/d6a8eab795954b60aab54f4a98556397/?a=1233&br=3066&bt=1533&cd=0%7C0%7C1&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=98Z~oeYh4kag3&l=202110152241330101880612273A179C58&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3dmbzo6Zjl0ODMzNzczM0ApZWQ8N2dpO2U5Nzk3OWYzZWcuXmpkcjQwcGZgLS1kMTZzczQwYTY1My4xLTQ2MTJeYDI6Yw%3D%3D&vl=&vr=",
 		caption: "Beautiful city #instagram",
 		likes: 421,
 		key: 1,
@@ -37,8 +35,8 @@ const posts = [
 				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
 			username: "memphisdepay",
 		},
-		imageUri:
-			"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
+		videoUrl:
+			"https://v16m.tiktokcdn.com/b811e1dcf623778aa91c08c66715bd47/616a5814/video/tos/useast2a/tos-useast2a-pve-0068/4c76da16c9dc4f62927fa2fc31acaaf5/?a=1233&br=3342&bt=1671&cd=0%7C0%7C1&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=98Z~oeYh4kag3&l=202110152241330101880612273A179C58&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=am5raTY6ZjlzODMzNzczM0ApODo1PGRmNmU7Nzs4ZzM4NmczbDJecjRfLmJgLS1kMTZzczYzL2FhYzJjMmJfLzE1YzY6Yw%3D%3D&vl=&vr=",
 		caption: "Beautiful city #instagram",
 		likes: 1323423,
 		key: 2,
@@ -49,35 +47,11 @@ const posts = [
 				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
 			username: "abubakarMana01",
 		},
-		imageUri:
-			"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
+		videoUrl:
+			"https://v16m.tiktokcdn.com/dacb902adde5344d53596940c3f40788/616a4ef0/video/tos/useast2a/tos-useast2a-ve-0068c003/49a24b3447f24fa99896cd7d70cb7523/?a=1233&br=2092&bt=1046&cd=0%7C0%7C1&ch=0&cr=0&cs=0&cv=1&dr=0&ds=3&er=&ft=98Z~oeYh4kag3&l=2021101522024001018907316536166607&lr=tiktok_m&mime_type=video_mp4&net=0&pl=0&qs=0&rc=M3lzeTY6ZjdmODMzNzczM0ApOGllNzo7aGRpN2U4NzQzNWdnXzJscjRfY2JgLS1kMTZzczI0LV41YjIzNGJfYl4xMGA6Yw%3D%3D&vl=&vr=",
 		caption: "Beautiful city #instagram",
 		likes: 421,
 		key: 3,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-			username: "memphisdepay",
-		},
-		imageUri:
-			"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		caption: "Beautiful city #instagram",
-		likes: 1323423,
-		key: 4,
-	},
-	{
-		user: {
-			imageUri:
-				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-			username: "abubakarMana01",
-		},
-		imageUri:
-			"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-		caption: "Beautiful city #instagram",
-		likes: 421,
-		key: 5,
 	},
 ];
 
@@ -132,7 +106,7 @@ const Reel = ({ item }) => {
 					<Video
 						ref={video}
 						style={styles.video}
-						source={{ uri: videos[Math.floor(Math.random() * 9)] }}
+						source={{ uri: item.videoUrl }}
 						resizeMode="contain"
 						isLooping={false}
 						shouldPlay={shouldPlay}
