@@ -5,23 +5,46 @@ import {
 	View,
 	TouchableWithoutFeedback,
 	Image,
+	ToastAndroid,
 } from "react-native";
-import {
-	FontAwesome,
-	Ionicons,
-	MaterialCommunityIcons,
-	SimpleLineIcons,
-} from "@expo/vector-icons";
+import { MaterialCommunityIcons, SimpleLineIcons } from "@expo/vector-icons";
 
 import { Colors, Styles } from "../../config";
+import { db } from "../../config/firebase";
+import { useAuthContext } from "../../contexts/AuthProvider";
+
 const PostFooter = ({ post }) => {
-	const [isLiked, setIsLiked] = useState(false);
+	const { currentUser } = useAuthContext();
+
+	const [isLiked, setIsLiked] = useState(true);
 	const [likesCount, setLikesCount] = useState(post.likes);
 	const [isBookmarked, setIsBookmarked] = useState(false);
 
 	const handleLike = () => {
 		setIsLiked(!isLiked);
 		setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
+
+		isLiked && addLiked();
+	};
+
+	const addLiked = () => {
+		console.log(isLiked);
+		isLiked &&
+			db
+				.collection("users")
+				.doc(currentUser.uid)
+				.collection("likedPosts")
+				.add(post)
+				.then(() => {
+					ToastAndroid.show("Post added to liked", ToastAndroid.SHORT);
+				})
+				.catch(err => {
+					ToastAndroid.show(
+						"Couldn't added post to liked. Check your internet connectivity",
+						ToastAndroid.SHORT
+					);
+					console.log(err.message);
+				});
 	};
 
 	const handleBookmark = () => {
@@ -34,7 +57,7 @@ const PostFooter = ({ post }) => {
 				<View style={styles.iconsLeft}>
 					<View style={styles.icon}>
 						<TouchableWithoutFeedback onPress={handleLike}>
-							{isLiked ? (
+							{!isLiked ? (
 								<MaterialCommunityIcons
 									name="heart"
 									size={30}
@@ -84,10 +107,12 @@ const PostFooter = ({ post }) => {
 			</View>
 
 			<Text style={styles.likes}>{likesCount} likes</Text>
-			<Text style={styles.caption}>
-				<Text style={styles.username}>{post.user.username || post.user} </Text>
-				{post.caption}
-			</Text>
+			{post.caption ? (
+				<Text style={styles.caption}>
+					<Text style={styles.username}>{post.user.username}</Text>
+					{post.caption}
+				</Text>
+			) : null}
 			<Text style={styles.timePosted}>
 				{post.postedAt || post.createdAt.toDate().toDateString()}
 			</Text>

@@ -1,5 +1,5 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import {
 	StyleSheet,
 	TouchableOpacity,
@@ -7,18 +7,39 @@ import {
 	View,
 	Text,
 	ToastAndroid,
+	Image,
 } from "react-native";
 import firebase from "firebase/app";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import * as ImagePicker from "expo-image-picker";
 
 import { Colors } from "../config";
 import ErrorMessage from "../components/Auth/ErrorMessage";
 import { db } from "../config/firebase";
 import { useAuthContext } from "../contexts/AuthProvider";
+import PostsCustomHeader from "../components/PostsCustomHeader";
 
 export default function AddPostScreen({ navigation }) {
 	const { currentUser } = useAuthContext();
+	const [imageUrl, setImageUrl] = useState("");
+
+	let openImagePickerAsync = async () => {
+		let permissionResult =
+			await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+		if (permissionResult.granted === false) {
+			alert("Permission to access camera roll is required!");
+			return;
+		}
+
+		let pickerResult = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.Images,
+			allowsEditing: true,
+			quality: 0.5,
+		});
+		setImageUrl(pickerResult.uri);
+	};
 
 	const validationSchema = Yup.object().shape({
 		caption: Yup.string()
@@ -33,8 +54,7 @@ export default function AddPostScreen({ navigation }) {
 			.collection("posts")
 			.add({
 				caption: values.caption,
-				imageUrl:
-					"https://phantom-marca.unidadeditorial.es/cad57253bb118bb77a748d848778cc81/f/webp/assets/multimedia/imagenes/2021/10/12/16340512953884.jpg",
+				imageUrl,
 				user: {
 					username: currentUser.displayName,
 					imageUrl:
@@ -55,6 +75,7 @@ export default function AddPostScreen({ navigation }) {
 
 	return (
 		<View style={styles.container}>
+			<PostsCustomHeader navigation={navigation} headerTitle="New Post" />
 			<Formik
 				initialValues={{ caption: "" }}
 				validationSchema={validationSchema}
@@ -63,12 +84,22 @@ export default function AddPostScreen({ navigation }) {
 				{({ handleSubmit, handleChange, errors, values }) => (
 					<>
 						<View style={styles.inputsContainer}>
-							<TouchableOpacity style={styles.imageUploadContainer}>
-								<MaterialCommunityIcons
-									name="camera"
-									color={Colors.darkGrey}
-									size={40}
-								/>
+							<TouchableOpacity
+								style={styles.imageUploadContainer}
+								onPress={openImagePickerAsync}
+							>
+								{!imageUrl ? (
+									<MaterialCommunityIcons
+										name="camera"
+										color={Colors.darkGrey}
+										size={40}
+									/>
+								) : (
+									<Image
+										source={{ uri: imageUrl }}
+										style={{ width: "100%", height: "100%" }}
+									/>
+								)}
 							</TouchableOpacity>
 							<View style={styles.textInputContainer}>
 								<TextInput
@@ -99,18 +130,18 @@ export default function AddPostScreen({ navigation }) {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingHorizontal: 15,
 	},
 	inputsContainer: {
 		flexDirection: "row",
 		paddingTop: 20,
-		paddingBottom: 35,
+		paddingBottom: 25,
 		borderBottomColor: Colors.grey,
 		borderBottomWidth: 1,
+		marginHorizontal: 15,
 	},
 	imageUploadContainer: {
-		width: 120,
-		height: 120,
+		width: 100,
+		height: 100,
 		overflow: "hidden",
 		borderRadius: 10,
 		backgroundColor: Colors.lightgrey,

@@ -8,46 +8,44 @@ import {
 	TouchableWithoutFeedback,
 } from "react-native";
 import AppLoadingAnimation from "../components/AppLoadingAnimation";
+import PostsCustomHeader from "../components/PostsCustomHeader";
 
 import { Colors } from "../config";
 import { db } from "../config/firebase";
 import { useAuthContext } from "../contexts/AuthProvider";
 
-export default function AccountGallery({ navigation }) {
-	const [posts, setPosts] = useState([]);
+export default function LikedPostsScreen({ navigation }) {
+	const [likedPosts, setLikedPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const { currentUser } = useAuthContext();
 
 	useEffect(() => {
 		setIsLoading(true);
-
 		const unsubscribe = db
 			.collection("users")
 			.doc(currentUser.uid)
-			.collection("posts")
-			.orderBy("createdAt", "desc")
+			.collection("likedPosts")
 			.onSnapshot(
 				snapshot => {
-					setPosts(snapshot.docs.map(doc => doc.data()));
+					setLikedPosts(snapshot.docs.map(doc => doc.data()));
 					setIsLoading(false);
 				},
-				err => {
-					setIsLoading(false);
-					console.log(err.message);
-				}
+				err => console.log(err.message)
 			);
+
 		return unsubscribe;
 	}, []);
 
 	return (
 		<View style={styles.container}>
+			<PostsCustomHeader navigation={navigation} headerTitle="Liked posts" />
 			{isLoading ? (
 				<AppLoadingAnimation />
 			) : (
 				<FlatList
 					keyExtractor={item => item.createdAt + Math.random().toString()}
-					data={posts}
+					data={likedPosts}
 					numColumns={3}
 					renderItem={({ item }) => (
 						<TouchableWithoutFeedback

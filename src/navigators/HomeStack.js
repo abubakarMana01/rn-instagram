@@ -10,25 +10,11 @@ const HomeStackNavigator = () => {
 	const Stack = createStackNavigator();
 
 	return (
-		<Stack.Navigator>
-			<Stack.Screen
-				name="Feeds"
-				component={AppNavigator}
-				options={() => ({
-					headerShown: false,
-				})}
-			/>
-			<Stack.Screen
-				name="Messages"
-				component={MessagesScreen}
-				options={{ headerShown: false }}
-			/>
+		<Stack.Navigator screenOptions={{ headerShown: false }}>
+			<Stack.Screen name="Feeds" component={AppNavigator} />
+			<Stack.Screen name="Messages" component={MessagesScreen} />
 			<Stack.Screen name="Add post" component={AddPostScreen} />
-			<Stack.Screen
-				name="View post"
-				component={ViewPostScreen}
-				options={{ headerTitle: "Posts" }}
-			/>
+			<Stack.Screen name="View post" component={ViewPostScreen} />
 		</Stack.Navigator>
 	);
 };

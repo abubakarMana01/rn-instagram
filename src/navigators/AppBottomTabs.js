@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import ReelsScreen from "../screens/ReelsScreen";
 import DiscoveryScreen from "../screens/DiscoveryScreen";
 import AccountScreen from "../screens/AccountScreen";
-import NotificationsScreen from "../screens/NotificationsScreen";
+import LikedPostsScreen from "../screens/LikedPostsScreen";
 import HomeScreen from "../screens/HomeScreen";
 import { Colors } from "../config";
 import { Image } from "react-native";
@@ -75,19 +75,21 @@ export default function AppNavigator() {
 				}}
 			/>
 			<Tab.Screen
-				name="Notifications"
-				component={NotificationsScreen}
+				name="Liked posts"
+				component={LikedPostsScreen}
 				options={{
 					tabBarIcon: ({ focused }) =>
 						focused ? (
-							<Image
-								source={require("../../assets/images/Icons/shopping-bag.png")}
-								style={{ width: 26, height: 26 }}
+							<MaterialCommunityIcons
+								name="heart"
+								color={Colors.light}
+								size={26}
 							/>
 						) : (
-							<Image
-								source={require("../../assets/images/Icons/shopping-bag-outline.png")}
-								style={{ width: 26, height: 26 }}
+							<MaterialCommunityIcons
+								name="heart-outline"
+								color={Colors.light}
+								size={26}
 							/>
 						),
 				}}

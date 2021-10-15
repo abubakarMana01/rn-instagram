@@ -70,48 +70,6 @@ const ChatList = () => {
 			imageUri:
 				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
 		},
-		{
-			id: "10",
-			username: "Ahmed",
-			lastSeen: "Active 11w ago",
-			imageUri:
-				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-		},
-		{
-			id: "11",
-			username: "Paul O Onoja",
-			lastSeen: "Active today",
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		},
-		{
-			id: "12",
-			username: "Asmau Mana",
-			lastSeen: "Active 2days ago",
-			imageUri:
-				"https://i.insider.com/5d03aa8e6fc9201bc7002b43?width=1136&format=jpeg",
-		},
-		{
-			id: "13",
-			username: "yusuf",
-			lastSeen: "Active 2months ago",
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		},
-		{
-			id: "14",
-			username: "Galadz⛱️",
-			lastSeen: "Active 2months ago",
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		},
-		{
-			id: "15",
-			username: "Adepoju Naeem",
-			lastSeen: "Active 2months ago",
-			imageUri:
-				"https://i.pinimg.com/originals/0b/ac/f6/0bacf62a4bd456d02d02c6b8a5c98f67.jpg",
-		},
 	]);
 
 	const [input, setInput] = useState("");

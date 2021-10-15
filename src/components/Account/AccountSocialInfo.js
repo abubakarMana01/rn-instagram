@@ -16,14 +16,20 @@ export default function AccountSocialInfo() {
 			.collection("users")
 			.doc(currentUser.uid)
 			.collection("posts")
-			.onSnapshot(snapshot => setNumberOfPosts(snapshot.docs.length));
+			.onSnapshot(
+				snapshot => setNumberOfPosts(snapshot.docs.length),
+				err => console.log(err.message)
+			);
 
 		db.collection("users")
 			.doc(currentUser.uid)
-			.onSnapshot(snapshot => {
-				setNumberOfFollowers(snapshot.data().followers.length);
-				setNumberOfFollowing(snapshot.data().following.length);
-			});
+			.onSnapshot(
+				snapshot => {
+					setNumberOfFollowers(snapshot.data().followers.length);
+					setNumberOfFollowing(snapshot.data().following.length);
+				},
+				err => console.log(err.message)
+			);
 
 		return unsubscribe;
 	}, []);
