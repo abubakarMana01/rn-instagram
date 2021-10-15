@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 	container: {
 		width: Dimensions.get("window").width,
 		maxHeight: Dimensions.get("window").width,
-		backgroundColor: Colors.lightgrey,
+		backgroundColor: Colors.darkGrey,
 	},
 	image: {
 		width: "100%",

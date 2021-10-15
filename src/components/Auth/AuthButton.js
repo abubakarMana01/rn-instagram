@@ -1,11 +1,5 @@
 import React from "react";
-import {
-	ActivityIndicator,
-	Pressable,
-	StyleSheet,
-	Text,
-	View,
-} from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
 import { Colors, Styles } from "../../config";
 
 export default function AuthButton({ title, onPress, isLoading = false }) {

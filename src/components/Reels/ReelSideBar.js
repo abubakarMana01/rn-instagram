@@ -1,19 +1,31 @@
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { Colors } from "../../config";
 
 export default function ReelSideBar() {
+	const [isLiked, setIsLiked] = useState(false);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.optionContainer}>
 				<View style={styles.iconContainer}>
-					<MaterialCommunityIcons
-						name="heart-outline"
-						size={32}
-						color={Colors.light}
-					/>
+					<TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
+						{isLiked ? (
+							<MaterialCommunityIcons
+								name="heart"
+								size={32}
+								color={Colors.red}
+							/>
+						) : (
+							<MaterialCommunityIcons
+								name="heart-outline"
+								size={32}
+								color={Colors.light}
+							/>
+						)}
+					</TouchableOpacity>
 				</View>
 				<Text style={styles.optionStatCount}>167k</Text>
 			</View>
@@ -22,9 +34,7 @@ export default function ReelSideBar() {
 				<View style={styles.iconContainer}>
 					<Image
 						style={styles.icon}
-						source={{
-							uri: "https://img.icons8.com/material-outlined/60/ffffff/speech.png",
-						}}
+						source={require("../../../assets/images/Icons/comment-outline.png")}
 					/>
 				</View>
 				<Text style={styles.optionStatCount}>167k</Text>

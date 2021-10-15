@@ -45,9 +45,7 @@ export default function LoginScreen({ navigation }) {
 				<View style={styles.logoContainer}>
 					<Image
 						style={styles.logo}
-						source={{
-							uri: "https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Instagram_colored_svg_1-512.png",
-						}}
+						source={require("../../../assets/images/Icons/instagram.png")}
 					/>
 				</View>
 				<Formik

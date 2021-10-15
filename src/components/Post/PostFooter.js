@@ -52,9 +52,7 @@ const PostFooter = ({ post }) => {
 					<View style={styles.icon}>
 						<Image
 							style={styles.iconImage}
-							source={{
-								uri: "https://img.icons8.com/material-outlined/60/ffffff/speech.png",
-							}}
+							source={require("../../../assets/images/Icons/comment-outline.png")}
 						/>
 					</View>
 					<View style={styles.icon}>
@@ -63,12 +61,6 @@ const PostFooter = ({ post }) => {
 							size={24}
 							color={Colors.light}
 						/>
-						{/* <Image
-							style={styles.iconImage}
-							source={{
-								uri: "https://img.icons8.com/fluency-systems-regular/60/ffffff/paper-plane.png",
-							}}
-						/> */}
 					</View>
 				</View>
 

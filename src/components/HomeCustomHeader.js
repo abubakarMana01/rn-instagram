@@ -1,11 +1,15 @@
 import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import { Colors } from "../config";
 import { auth } from "../config/firebase";
+import { NavigationContainer } from "@react-navigation/native";
 
 const HomeCustomHeader = ({ messagePress }) => {
+	const navigation = useNavigation();
+
 	const handleLogout = () => {
 		auth.signOut();
 	};
@@ -18,7 +22,10 @@ const HomeCustomHeader = ({ messagePress }) => {
 				source={require("../../assets/images/header-logo.png")}
 			/>
 			<View style={styles.headerIcons}>
-				<TouchableOpacity style={styles.iconContainer} onPress={handleLogout}>
+				<TouchableOpacity
+					style={styles.iconContainer}
+					onPress={() => navigation.navigate("Add post")}
+				>
 					<FontAwesome name="plus-square-o" size={26} color={Colors.light} />
 				</TouchableOpacity>
 				<TouchableOpacity style={styles.iconContainer} onPress={messagePress}>
@@ -51,7 +58,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	iconContainer: {
-		marginHorizontal: 11,
+		marginLeft: 22,
 	},
 	icon: {
 		width: 115,

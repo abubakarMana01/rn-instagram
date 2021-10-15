@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import MessagesScreen from "../screens/MessagesScreen";
 import AppNavigator from "./AppBottomTabs";
+import AddPostScreen from "../screens/AddPostScreen";
 
 const HomeStackNavigator = () => {
 	const Stack = createStackNavigator();
@@ -21,6 +22,7 @@ const HomeStackNavigator = () => {
 				component={MessagesScreen}
 				options={{ headerShown: false }}
 			/>
+			<Stack.Screen name="Add post" component={AddPostScreen} />
 		</Stack.Navigator>
 	);
 };
