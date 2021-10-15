@@ -1,23 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { number } from "yup";
 import { Colors, Styles } from "../../config";
+import { db } from "../../config/firebase";
+import { useAuthContext } from "../../contexts/AuthProvider";
 
 export default function AccountSocialInfo() {
+	const { currentUser } = useAuthContext();
+	const [numberOfPosts, setNumberOfPosts] = useState("-");
+	const [numberOfFollowers, setNumberOfFollowers] = useState("-");
+	const [numberOfFollowing, setNumberOfFollowing] = useState("-");
+
+	useEffect(() => {
+		const unsubscribe = db
+			.collection("users")
+			.doc(currentUser.uid)
+			.collection("posts")
+			.onSnapshot(snapshot => setNumberOfPosts(snapshot.docs.length));
+
+		db.collection("users")
+			.doc(currentUser.uid)
+			.onSnapshot(snapshot => {
+				setNumberOfFollowers(snapshot.data().followers.length);
+				setNumberOfFollowing(snapshot.data().following.length);
+			});
+
+		return unsubscribe;
+	}, []);
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.imageContainer}></View>
 			<View style={styles.profileStatsContainer}>
 				<View style={styles.profileStats}>
 					<View style={styles.statContainer}>
-						<Text style={styles.statNumber}>1</Text>
+						<Text style={styles.statNumber}>{numberOfPosts}</Text>
 						<Text style={styles.statName}>Posts</Text>
 					</View>
 					<View style={styles.statContainer}>
-						<Text style={styles.statNumber}>938</Text>
+						<Text style={styles.statNumber}>{numberOfFollowers}</Text>
 						<Text style={styles.statName}>Followers</Text>
 					</View>
 					<View style={styles.statContainer}>
-						<Text style={styles.statNumber}>884</Text>
+						<Text style={styles.statNumber}>{numberOfFollowing}</Text>
 						<Text style={styles.statName}>Following</Text>
 					</View>
 				</View>

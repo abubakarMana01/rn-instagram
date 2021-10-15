@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import {
+	StyleSheet,
+	View,
+	Image,
+	TouchableOpacity,
+	TouchableWithoutFeedback,
+} from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -16,11 +22,13 @@ const HomeCustomHeader = ({ messagePress }) => {
 
 	return (
 		<View style={styles.container}>
-			<Image
-				style={styles.icon}
-				resizeMode="contain"
-				source={require("../../assets/images/header-logo.png")}
-			/>
+			<TouchableWithoutFeedback onPress={handleLogout}>
+				<Image
+					style={styles.icon}
+					resizeMode="contain"
+					source={require("../../assets/images/header-logo.png")}
+				/>
+			</TouchableWithoutFeedback>
 			<View style={styles.headerIcons}>
 				<TouchableOpacity
 					style={styles.iconContainer}
@@ -58,7 +66,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 	iconContainer: {
-		marginLeft: 22,
+		marginLeft: 30,
 	},
 	icon: {
 		width: 115,

@@ -85,10 +85,12 @@ const PostFooter = ({ post }) => {
 
 			<Text style={styles.likes}>{likesCount} likes</Text>
 			<Text style={styles.caption}>
-				<Text style={styles.username}>{post.user.username} </Text>
+				<Text style={styles.username}>{post.user.username || post.user} </Text>
 				{post.caption}
 			</Text>
-			<Text style={styles.timePosted}>{post.postedAt}</Text>
+			<Text style={styles.timePosted}>
+				{post.postedAt || post.createdAt.toDate().toDateString()}
+			</Text>
 		</View>
 	);
 };

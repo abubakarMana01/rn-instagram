@@ -7,6 +7,7 @@ import navigationTheme from "./navigationTheme";
 import AuthStackNavigator from "./AuthStack";
 import { auth } from "../config/firebase";
 import { useAuthContext } from "../contexts/AuthProvider";
+import AppLoadingAnimation from "../components/AppLoadingAnimation";
 
 export default function App() {
 	const { currentUser, setCurrentUser } = useAuthContext();
@@ -29,7 +30,7 @@ export default function App() {
 		return subscriber;
 	}, []);
 
-	if (initializing) return null;
+	if (initializing) return <AppLoadingAnimation />;
 
 	return (
 		<NavigationContainer theme={navigationTheme}>

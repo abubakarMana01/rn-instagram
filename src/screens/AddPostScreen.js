@@ -35,8 +35,14 @@ export default function AddPostScreen({ navigation }) {
 				caption: values.caption,
 				imageUrl:
 					"https://phantom-marca.unidadeditorial.es/cad57253bb118bb77a748d848778cc81/f/webp/assets/multimedia/imagenes/2021/10/12/16340512953884.jpg",
-				user: currentUser.displayName,
+				user: {
+					username: currentUser.displayName,
+					imageUrl:
+						"https://phantom-marca.unidadeditorial.es/cad57253bb118bb77a748d848778cc81/f/webp/assets/multimedia/imagenes/2021/10/12/16340512953884.jpg",
+				},
 				createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+				likes: 0,
+				comments: [],
 			})
 			.then(() => ToastAndroid.show("Post added", ToastAndroid.SHORT))
 			.catch(err => {

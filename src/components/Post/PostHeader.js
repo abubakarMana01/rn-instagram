@@ -9,7 +9,7 @@ const PostHeader = ({ post }) => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.profile}>
-				<ProfilePicture imageUri={post.user.imageUri} width={40} height={40} />
+				<ProfilePicture imageUri={post.user.imageUrl} width={40} height={40} />
 				<Text style={styles.username}>{post.user.username}</Text>
 			</View>
 			<MaterialCommunityIcons

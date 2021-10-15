@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View, FlatList, Dimensions, Image } from "react-native";
+import {
+	StyleSheet,
+	View,
+	FlatList,
+	Dimensions,
+	Image,
+	TouchableWithoutFeedback,
+} from "react-native";
+import AppLoadingAnimation from "../components/AppLoadingAnimation";
 
 import { Colors } from "../config";
 import { db } from "../config/firebase";
@@ -68,33 +76,53 @@ import { useAuthContext } from "../contexts/AuthProvider";
 // 	},
 // ];
 
-export default function AccountGallery() {
+export default function AccountGallery({ navigation }) {
 	const [posts, setPosts] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const { currentUser } = useAuthContext();
 
 	useEffect(() => {
+		setIsLoading(true);
+
 		const unsubscribe = db
 			.collection("users")
 			.doc(currentUser.uid)
 			.collection("posts")
 			.orderBy("createdAt", "desc")
-			.onSnapshot(snapshot => setPosts(snapshot.docs.map(doc => doc.data())));
+			.onSnapshot(
+				snapshot => {
+					setPosts(snapshot.docs.map(doc => doc.data()));
+					setIsLoading(false);
+				},
+				err => {
+					setIsLoading(false);
+					console.log(err.message);
+				}
+			);
 		return unsubscribe;
 	}, []);
 
 	return (
 		<View style={styles.container}>
-			<FlatList
-				keyExtractor={item => item.createdAt + Math.random().toString()}
-				data={posts}
-				numColumns={3}
-				renderItem={({ item }) => (
-					<View style={styles.imageContainer}>
-						<Image style={styles.image} source={{ uri: item.imageUrl }} />
-					</View>
-				)}
-			/>
+			{isLoading ? (
+				<AppLoadingAnimation />
+			) : (
+				<FlatList
+					keyExtractor={item => item.createdAt + Math.random().toString()}
+					data={posts}
+					numColumns={3}
+					renderItem={({ item }) => (
+						<TouchableWithoutFeedback
+							onPress={() => navigation.navigate("View post", { post: item })}
+						>
+							<View style={styles.imageContainer}>
+								<Image style={styles.image} source={{ uri: item.imageUrl }} />
+							</View>
+						</TouchableWithoutFeedback>
+					)}
+				/>
+			)}
 		</View>
 	);
 }

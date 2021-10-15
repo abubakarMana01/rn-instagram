@@ -40,6 +40,9 @@ export default function SignUpScreen({ navigation }) {
 			db.collection("users").doc(cred.user.uid).set({
 				username: values.username,
 				email: values.email,
+				following: [],
+				followers: [],
+				posts: 0,
 			});
 		} catch (error) {
 			setIsLoading(false);

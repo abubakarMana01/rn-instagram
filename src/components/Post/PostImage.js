@@ -5,7 +5,7 @@ import { Colors } from "../../config";
 const PostImage = ({ post }) => {
 	return (
 		<View style={styles.container}>
-			<Image source={{ uri: post.imageUri }} style={styles.image} />
+			<Image source={{ uri: post.imageUrl }} style={styles.image} />
 		</View>
 	);
 };
